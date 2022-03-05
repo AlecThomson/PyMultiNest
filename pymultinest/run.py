@@ -52,13 +52,13 @@ def _load_library(libname):
 lib = _load_library('libmultinest')
 
 lib_mpi = None
-try: # detect if run through mpiexec/mpirun
-	from mpi4py import MPI
-	if MPI.COMM_WORLD.Get_size() > 1: # need parallel capabilities
-		lib_mpi = _load_library('libmultinest_mpi')
-except ImportError as e:
-	if 'PMIX_RANK' in os.environ:
-		print("Not using MPI because import mpi4py failed: '%s'. To debug, run python -c 'import mpi4py'.", e)
+# try: # detect if run through mpiexec/mpirun
+# 	from mpi4py import MPI
+# 	if MPI.COMM_WORLD.Get_size() > 1: # need parallel capabilities
+# 		lib_mpi = _load_library('libmultinest_mpi')
+# except ImportError as e:
+# 	if 'PMIX_RANK' in os.environ:
+# 		print("Not using MPI because import mpi4py failed: '%s'. To debug, run python -c 'import mpi4py'.", e)
 
 from ctypes import *
 from numpy.ctypeslib import as_array
